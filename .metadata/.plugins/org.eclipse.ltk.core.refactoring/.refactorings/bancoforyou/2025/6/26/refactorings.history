@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;bancoforyou/src/main/resources/informacoes.env&apos; to &apos;.env&apos;" description="Rename resource &apos;informacoes.env&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/informacoes.env" name=".env" stamp="1750805813063" updateReferences="true"/>
+</session>

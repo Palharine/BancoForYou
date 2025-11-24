@@ -1,0 +1,7 @@
+1752606657175	Move 'BancoForYou.java' to 'User'
+1752606658553	Move 'UserController.java' to 'User'
+1752606659627	Move 'UserService.java' to 'User'
+1752606660815	Move 'UserRepository.java' to 'User'
+1752606661861	Move 'Usuarios.java' to 'User'
+1752606801312	Rename resource 'Transitions'
+1752606812444	Rename resource 'Transacoes'
