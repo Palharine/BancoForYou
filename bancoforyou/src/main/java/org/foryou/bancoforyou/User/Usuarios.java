@@ -1,5 +1,7 @@
 package org.foryou.bancoforyou.User;
 
+import java.math.BigDecimal;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,7 +27,7 @@ public class Usuarios{
 	
 	protected int idade;
 
-	protected Double saldo;
+	protected BigDecimal saldo;
 	
 	protected Boolean contaPJ;
 	

@@ -10,4 +10,6 @@ public interface TransacoesService{
     public List<TransacoesMinDTO> getTransacoesByDate(Date dataTransacao);
     public List<TransacoesMinDTO> getTransacoesByReceptante(String nomeReceptante);
     public List<TransacoesMinDTO> findAll();
+    public Transacoes transferencia( BigDecimal valor, String formaPagamento, String tipoConta, String chave, Date data);  
+    public Transacoes saveTransferencia(BigDecimal valor,  String formaPagamento, String tipoConta, String chave, Date data);
 }

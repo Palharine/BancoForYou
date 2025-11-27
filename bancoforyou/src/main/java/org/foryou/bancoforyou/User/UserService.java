@@ -3,6 +3,7 @@ package org.foryou.bancoforyou.User;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,7 @@ public interface UserService{
 	public void save(UserMinDTO userMinDTO);
 	public List<UserMinDTO> findAll();
 	public Optional<UserMinDTO> findUserByName(String name);
+    public UserMinDTO findById(ObjectId id);
+    public UserMinDTO pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor);
     //public List<Transacoes> findAllTransacoes();
 }

@@ -9,7 +9,9 @@ import org.bson.types.ObjectId;
 
 @Repository
 //Serve para realizar operações no banco de dados, servindo como um DAO, sempre vai extender um repositório, sendo do JPA ou do banco de dados selecionado, herdando as operações CRUD	
-public interface UserRepository extends MongoRepository<UserMinDTO,ObjectId>{
+public interface UserRepository extends MongoRepository<Ususarios,ObjectId>{
 	
+    public UserMinDTO pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor);
 	Optional<UserMinDTO> findUserByName(String name);
+    
 }

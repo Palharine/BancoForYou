@@ -1,5 +1,6 @@
 package org.foryou.bancoforyou.Transations;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.foryou.bancoforyou.User.Usuarios;
@@ -21,7 +22,7 @@ public class Transacoes{
     protected Long idTransacao;
 
     @Column (name = "Valor", nullable = false)
-    protected Double valor;
+    protected BigDecimal valor;
     
     @Column (name = "idPagante", nullable = false)
     protected Long idPagante;
@@ -70,7 +71,7 @@ public class Transacoes{
         return idTransacao;
    }
 
-    public Double getValor(){
+    public BigDecimal getValor(){
         return valor;
     }
 
@@ -118,7 +119,7 @@ public class Transacoes{
         this.idTransacao = idTransacao;
     }
 
-    public void setValor(Double valor){
+    public void setValor(BigDecimal valor){
         this.valor = valor;
     }
 

@@ -1,12 +1,13 @@
 package org.foryou.bancoforyou.Transations;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TransacoesMinDTO{
     
     protected Long idTransacao;
 
-    protected Double valor;
+    protected BigDecimal valor;
 
     protected Date dataTransacao;
 
@@ -23,7 +24,7 @@ public class TransacoesMinDTO{
         return idTransacao;
     }
 
-    public Double getValor(){
+    public BigDecimal getValor(){
         return valor;
     }
 

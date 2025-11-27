@@ -1,5 +1,7 @@
 package org.foryou.bancoforyou.User;
 
+import java.math.BigDecimal;
+
 import org.bson.types.ObjectId;
 
 public class UserMinDTO{
@@ -10,7 +12,7 @@ public class UserMinDTO{
 
     protected int idade;
 
-    protected Double saldo;
+    protected BigDecimal saldo;
 
     protected String email;
 
