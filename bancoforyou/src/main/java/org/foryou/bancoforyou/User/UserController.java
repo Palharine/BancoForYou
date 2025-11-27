@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/conta/contas")
+@RequestMapping("/conta")
 public class UserController{
 	
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping
-	public ResponseEntity<List<Usuarios>> getallUsers(){
-		return new ResponseEntity<List<Usuarios>>(userService.allUsers(), HttpStatus.OK);
+	@GetMapping("/contas")
+	public List<UserMinDTO> findAll(){
+	 	List<UserMinDTO> result = userService.findAll();
+        return result;
 	}
 	
 	@GetMapping("/{name}")
-	public ResponseEntity<Optional<Usuarios>> getUserByName(@PathVariable String name){
-		return new ResponseEntity<Optional<Usuarios>>(userService.oneUser(name), HttpStatus.OK);
+	public ResponseEntity<Optional<UserMinDTO>> getUserByName(@PathVariable String name){
+		return new ResponseEntity<Optional<UserMinDTO>>(userService.findUserByName(name), HttpStatus.OK);
 	}
-	
 }

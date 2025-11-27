@@ -24,4 +24,8 @@ public class BancoForYou{
 //To do: Criar limitações para que crianças não consigam usar as transições sem ser autorizadas pelos pais ou resposáveis
 //To do: Criar um chat com a IA para que ela consiga auxiliar o usuário com uma decisão de investimento dentro do /investimentos
 //To do: Criar o Front-End
-//To do:Colocar dentro do GitHub
+//To do: Colocar dentro do GitHub
+//To do: Controle de gastos/Histórico de gastos
+//To do: Extratos claros e inteligivel
+//To do: Pix,pagamentos, cashback ou recarga
+

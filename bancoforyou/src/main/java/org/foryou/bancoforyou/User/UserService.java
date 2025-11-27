@@ -14,20 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/conta")
 //Serve para receber os métodos do repository, contendo a lógica de negócio da aplicação
 @Service
-public class UserService{
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	public void save(Usuarios user) {
-		userRepository.save(user);
-	}
-	@GetMapping("/conta/contas")
-	public List<Usuarios> allUsers() {
-		return userRepository.findAll();	
-		}
-	
-	public Optional<Usuarios> oneUser(String name){
-		return userRepository.findUserByName(name);
-	}
+public interface UserService{
+	public void save(UserMinDTO userMinDTO);
+	public List<UserMinDTO> findAll();
+	public Optional<UserMinDTO> findUserByName(String name);
+    public UserMinDTO getNivel();
+    //public List<Transacoes> findAllTransacoes();
 }

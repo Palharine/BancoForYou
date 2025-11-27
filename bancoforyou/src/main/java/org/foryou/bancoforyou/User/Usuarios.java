@@ -14,10 +14,6 @@ import lombok.NoArgsConstructor;
 @Document(collection="usuarios")
 //Cria getters, setters e to strings 
 @Data
-//Cria um construtor que vai usar todas as propriedades usadas aqui como argumentos
-@AllArgsConstructor
-//Não precisa de argumentos para o construtor, mas o construtor ta feito
-@NoArgsConstructor
 public class Usuarios{
 	@Id
 	protected ObjectId id;
@@ -29,9 +25,9 @@ public class Usuarios{
 	
 	protected int idade;
 
-	protected double saldo;
+	protected Double saldo;
 	
-	protected boolean contaPJ;
+	protected Boolean contaPJ;
 	
 	protected String email;
 	
@@ -39,6 +35,76 @@ public class Usuarios{
 	
 	//public List<acoes> historico;
 	
+	public Usuarios(){}
+
+    public Usuarios(ObjectId id, String name, int nivel, int idade, double saldo, boolean ContaPJ, String email, String genero){
+        this.id = id;
+        this.name = name;
+        this.nivel = nivel;
+        this.idade = idade;
+        this.saldo = saldo;
+        this.contaPJ = ContaPJ;
+        this.email = email;
+        this.genero = genero;
+    }
+    
+    public ObjectId getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getNivel(){
+        return nivel;
+    }
+
+    public int getIdade(){
+        return idade;
+    }
+
+    public double getSaldo(){
+        return saldo;
+    }
+
+    public boolean getContaPJ(){
+        return contaPJ;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getGenero(){
+        return genero;
+    }
+
+    public void setId(ObjectId id){
+        this.id = id;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setNivel(int nivel){
+        this.nivel = nivel;
+    }
+
+    public void setIdade(int idade){
+        this.idade = idade;
+    }
+
+    public void setContaPJ(boolean contaPJ){
+        this.contaPJ = contaPJ;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
 	
-	
+    public void setGenero(String genero){
+        this.genero = genero;
+    }
 }
