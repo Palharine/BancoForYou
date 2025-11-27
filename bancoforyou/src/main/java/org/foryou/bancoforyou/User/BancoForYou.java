@@ -18,14 +18,12 @@ public class BancoForYou{
 	}
 }
 //To do: Criar usuários dentro do mongodb para testar
-//to Do: Criar um banco MySQL para criar as realões de transições
-//To do: Criar classes, service, repository e controller para as transições
+//to Do: Criar um banco SQL para criar as realões de transições
 //To do: Criar páginas especificas para tipos de niveis
 //To do: Criar limitações para que crianças não consigam usar as transições sem ser autorizadas pelos pais ou resposáveis
 //To do: Criar um chat com a IA para que ela consiga auxiliar o usuário com uma decisão de investimento dentro do /investimentos
 //To do: Criar o Front-End
-//To do: Colocar dentro do GitHub
-//To do: Controle de gastos/Histórico de gastos
+//To do: Controle de gastos
 //To do: Extratos claros e inteligivel
 //To do: Pix,pagamentos, cashback ou recarga
 

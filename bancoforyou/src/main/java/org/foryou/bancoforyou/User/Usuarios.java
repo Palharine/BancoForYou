@@ -33,11 +33,15 @@ public class Usuarios{
 	
 	protected String genero;
 	
-	//public List<acoes> historico;
-	
+    protected String cpf;
+
+    protected String cnpj;
+
+    protected String nomeBanco;
+
 	public Usuarios(){}
 
-    public Usuarios(ObjectId id, String name, int nivel, int idade, double saldo, boolean ContaPJ, String email, String genero){
+    public Usuarios(ObjectId id, String name, int nivel, int idade, double saldo, boolean ContaPJ, String email, String genero, String cpf, String cnpj,String nomeBanco ){
         this.id = id;
         this.name = name;
         this.nivel = nivel;
@@ -46,6 +50,9 @@ public class Usuarios{
         this.contaPJ = ContaPJ;
         this.email = email;
         this.genero = genero;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.nomeBanco = nomeBanco;
     }
     
     public ObjectId getId(){
@@ -80,6 +87,18 @@ public class Usuarios{
         return genero;
     }
 
+    public String getCPF(){
+        return cpf;
+    }
+    
+    public String getCNPJ(){
+        return cnpj;
+    }
+
+    public String getNomeBanco(){
+        return nomeBanco;
+    }
+
     public void setId(ObjectId id){
         this.id = id;
     }
@@ -106,5 +125,17 @@ public class Usuarios{
 	
     public void setGenero(String genero){
         this.genero = genero;
+    }
+
+    public void setCPF(String cpf){
+       this.cpf = cpf;
+    }
+    
+    public void setCNPJ(String cnpj){
+        this.cnpj = cnpj;
+    }
+
+    public void setNomeBanco(String nomeBanco){
+        this.nomeBanco = nomeBanco;
     }
 }

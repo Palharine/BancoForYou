@@ -18,6 +18,5 @@ public interface UserService{
 	public void save(UserMinDTO userMinDTO);
 	public List<UserMinDTO> findAll();
 	public Optional<UserMinDTO> findUserByName(String name);
-    public UserMinDTO getNivel();
     //public List<Transacoes> findAllTransacoes();
 }
