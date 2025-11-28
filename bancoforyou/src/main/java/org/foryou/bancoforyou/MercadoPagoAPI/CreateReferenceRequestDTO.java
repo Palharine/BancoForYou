@@ -1,31 +1,32 @@
 package org.foryou.bancoforyou.MercadoPagoAPI;
 
-import java.math.BigDecimal;
-//import java.util.List;
+public class CreateReferenceRequestDTO {
 
-import org.antlr.v4.runtime.misc.NotNull;
+    private PayerDTO payer;
+    private ItemDTO item;
+    private BackUrlsDTO backUrls;
 
-public record CreateReferenceRequestDTO(
-    
-         Long userId,
-         
-         
-         BigDecimal valor,
-         PayerDTO payer,
-         @NotNull
-         BackUrlsDTO backUrls,
-         //DeliveryAddressDTO deliveryAddress,
-         @NotNull
-         String notificationURL
-         //List<ItemDTO> itens,     
- ){
+    public PayerDTO getPayer() {
+        return payer;
+    }
 
+    public ItemDTO getItem() {
+        return item;
+    }
 
-public record BackUrlsDTO(
-        String succes,
-        String failure,
-        String pending
-        ){}
+    public BackUrlsDTO getBackUrls() {
+        return backUrls;
+    }
 
+    public void setPayer(PayerDTO payer) {
+        this.payer = payer;
+    }
 
+    public void setItem(ItemDTO item) {
+        this.item = item;
+    }
+
+    public void setBackUrls(BackUrlsDTO backUrls) {
+        this.backUrls = backUrls;
+    }
 }

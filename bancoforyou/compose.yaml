@@ -1,9 +1,0 @@
-banco-foryou-pg
-services:
-	image:postgres
-environment:
-	POSTGRES_PASSWORD:
-	POSTGRES_USER:
-	POSTGRES_DB:
-ports:
-      - 8080:8080
