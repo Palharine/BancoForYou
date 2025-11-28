@@ -54,10 +54,10 @@ public class UserServiceImpl implements UserService{
         pagante.setSaldo(pagante.getSaldo().subtract(valor));
         
         receptante.setSaldo(receptante.getSaldo().add(valor));
-
+        
         userRepository.save(pagante);
         userRepository.save(receptante);
-
+        
         result = UserMinDTO.fromEntity(pagante);
         return result;
     }
