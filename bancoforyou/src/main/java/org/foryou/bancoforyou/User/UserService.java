@@ -1,5 +1,6 @@
 package org.foryou.bancoforyou.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public interface UserService{
 	public void save(UserMinDTO userMinDTO);
 	public List<UserMinDTO> findAll();
 	public Optional<UserMinDTO> findUserByName(String name);
-    public UserMinDTO findById(ObjectId id);
-    public UserMinDTO pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor);
+    public Optional<UserMinDTO> findById(ObjectId id);
+    public void pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor);
     //public List<Transacoes> findAllTransacoes();
 }

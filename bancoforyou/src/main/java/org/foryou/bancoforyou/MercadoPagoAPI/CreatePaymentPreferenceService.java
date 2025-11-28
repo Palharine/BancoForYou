@@ -1,39 +1,40 @@
 package org.foryou.bancoforyou.MercadoPagoAPI;
 
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import lombok.extern.slf4j.Slf4j;
-
+import org.foryou.bancoforyou.MercadoPagoAPI.CreatePreferenceRequestDTO;
 import org.foryou.bancoforyou.MercadoPagoAPI.CreatePreferenceResponseDTO;
-import org.foryou.bancoforyou.MercadoPagoAPI;
+
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
+
+import java.util.UUID;
 
 @Service
-@Slf4j
-public class CreatePaymentPreferenceService{
+public class CreatePaymentPreferenceService {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(CreatePaymentPreferenceService.class);
 
     private final MercadoPagoClient mercadoPagoClient;
 
-    public CreatePaymentPreferenceService(MercadoPagoClient mercadoPagoClient){
+    public CreatePaymentPreferenceService(MercadoPagoClient mercadoPagoClient) {
         this.mercadoPagoClient = mercadoPagoClient;
     }
 
-    public CreatePreferenceResponseDTO createPreference(CreatePreferenceRequestDTO inputData){
-        log.info("Create payment preference with request: {}", inputData);
+    public CreatePreferenceResponseDTO createPreference(CreatePreferenceRequestDTO inputData) {
+        log.info("Creating payment preference with request: {}", inputData);
 
+        String orderNumber = UUID.randomUUID().toString();
 
-        String orderNumber = "123123123123123123";
-        
-    
+        try {
+            return mercadoPagoClient.createPreference(inputData, orderNumber);
 
-    try{
-        CreatePreferenceResponseDTO response = mercadoPagoClient.createPreference(inputData, orderNumber);
-        return response;
-    } catch (MPException e) {
-        throw new RuntimeException(e);
-    }catch(MPApiException e){
-        throw new RuntimeException(e);
-    }
+        } catch (MPApiException | MPException e) {
+            log.error("Error creating Mercado Pago preference: {}", e.getMessage(), e);
+            throw new RuntimeException("Erro ao criar preferência no Mercado Pago", e);
+        }
     }
 }
-
-

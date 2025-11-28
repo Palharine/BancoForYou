@@ -1,8 +1,10 @@
 package org.foryou.bancoforyou.Transations;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
+import org.bson.types.ObjectId;
 import org.foryou.bancoforyou.User.Usuarios;
 import org.springframework.data.annotation.Id;
 
@@ -25,10 +27,10 @@ public class Transacoes{
     protected BigDecimal valor;
     
     @Column (name = "idPagante", nullable = false)
-    protected Long idPagante;
+    protected ObjectId idPagante;
     
     @Column (name = "idReceptante", nullable = false)
-    protected Long idReceptante;
+    protected ObjectId idReceptante;
     
     @Column (name = "nomeReceptante", nullable = false)
     protected String nomeReceptante;
@@ -37,7 +39,7 @@ public class Transacoes{
     protected int idadeReceptante;
     
     @Column (name = "dataTransacao")
-    protected Date dataTransacao;
+    protected LocalDate dataTransacao;
     
     @Column (name = "formaPagamento", nullable = false)
     protected String formaPagamento;
@@ -75,11 +77,11 @@ public class Transacoes{
         return valor;
     }
 
-    public Long getIdPagante(){
+    public ObjectId getIdPagante(){
         return idPagante;
     }
 
-    public Long getIdReceptante(){
+    public ObjectId getIdReceptante(){
         return idReceptante;
     }
 
@@ -91,7 +93,7 @@ public class Transacoes{
         return idadeReceptante;
     }
 
-    public Date getDataTransacao(){
+    public LocalDate getDataTransacao(){
         return dataTransacao;
     }
     
@@ -123,11 +125,11 @@ public class Transacoes{
         this.valor = valor;
     }
 
-    public void setIdPagante(Long idPagante){
+    public void setIdPagante(ObjectId idPagante){
         this.idPagante = idPagante;
     }
 
-    public void setIdReceptante(Long idReceptante){
+    public void setIdReceptante(ObjectId idReceptante){
         this.idReceptante = idReceptante;
     }
 
@@ -139,7 +141,7 @@ public class Transacoes{
         this.idadeReceptante = idadeReceptante;
     }
 
-    public void setDataTransacao(Date dataTransacao){
+    public void setDataTransacao(LocalDate dataTransacao){
             this.dataTransacao = dataTransacao;
     }
 

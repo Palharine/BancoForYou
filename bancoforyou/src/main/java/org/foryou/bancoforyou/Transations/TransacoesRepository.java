@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public interface TransacoesRepository extends JpaRepository<TransacoesMinDTO, Long>{
-    @Query(nativeQuery = true, value = "
-        SELECT transacoes.id, transacoes.
     public List<TransacoesMinDTO> getTransacoesByDate(Date dataTransacoes);
     public List<TransacoesMinDTO> getTransacoesByReceptante(String nomeReceptante);
-    public Transacoes transferencia( BigDecimal valor,  String formaPagamento, String tipoConta, String chave, Date data)
+    public Transacoes transferencia( BigDecimal valor,  String formaPagamento, String tipoConta, String chave, Date data);
     public Transacoes saveTransferencia(BigDecimal valor,  String formaPagamento, String tipoConta, String chave, Date data);
 }

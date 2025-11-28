@@ -23,13 +23,13 @@ public class TransacoesController{
     @Autowired
     private ExtratosService extratosService;
 
-    @GetMapping()
+    @GetMapping(value = "/{dataTransacao}")
     public ResponseEntity<List<TransacoesMinDTO>> getTransacoesByDate(Date dataTransacao){
         List<TransacoesMinDTO> getTransacoesByDate = transacoesService.getTransacoesByDate(dataTransacao);
         return new ResponseEntity<>(getTransacoesByDate,HttpStatus.FOUND);
     }
     
-    @GetMapping()
+    @GetMapping(value = "/{nomeReceptante}")
         public ResponseEntity<List<TransacoesMinDTO>> getTransacoesByReceptante(String nomeReceptante){
         List<TransacoesMinDTO> getTransacoesByReceptante = transacoesService.getTransacoesByReceptante(nomeReceptante);
   

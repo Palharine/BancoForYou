@@ -43,7 +43,7 @@ public class Usuarios{
 
 	public Usuarios(){}
 
-    public Usuarios(ObjectId id, String name, int nivel, int idade, double saldo, boolean ContaPJ, String email, String genero, String cpf, String cnpj,String nomeBanco ){
+    public Usuarios(ObjectId id, String name, int nivel, int idade, BigDecimal saldo, boolean ContaPJ, String email, String genero, String cpf, String cnpj,String nomeBanco ){
         this.id = id;
         this.name = name;
         this.nivel = nivel;
@@ -73,7 +73,7 @@ public class Usuarios{
         return idade;
     }
 
-    public double getSaldo(){
+    public BigDecimal getSaldo(){
         return saldo;
     }
 
@@ -139,5 +139,8 @@ public class Usuarios{
 
     public void setNomeBanco(String nomeBanco){
         this.nomeBanco = nomeBanco;
+    }
+    public void setSaldo(BigDecimal saldo){
+        this.saldo = saldo;
     }
 }

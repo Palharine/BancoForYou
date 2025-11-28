@@ -1,12 +1,13 @@
 package org.foryou.bancoforyou.Extrato;
 
 import java.util.Date;
-import java.math.BigDecimal;
-public class Extrato{
-        
-public class Transacoes{    
 
-    @Id
+import org.foryou.bancoforyou.Transations.Transacoes;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+public class Extrato{
+
     protected Long idTransacao;
 
     protected BigDecimal valor;
@@ -15,7 +16,7 @@ public class Transacoes{
     
     protected int idadeReceptante;
     
-    protected Date dataTransacao;
+    protected LocalDate dataTransacao;
     
     protected String formaPagamento;
     
@@ -27,13 +28,13 @@ public class Transacoes{
 
     protected String cnpjReceptante;
 
-    pulbic Extrato(){}
+    public Extrato(){}
 
     public Extrato(Transacoes entity){
-        nomeReceptante = entity.getName();
-        cpfReceptante = entity.getCPF();
-        bancoReceptante = entity.getNomeBanco();
-        cnpjReceptante = entity.getCNPJ();
+        nomeReceptante = entity.getNomeReceptante();
+        cpfReceptante = entity.getCpfReceptante();
+        bancoReceptante = entity.getBancoReceptante();
+        cnpjReceptante = entity.getCNPJReceptante();
         dataTransacao = entity.getDataTransacao();
         formaPagamento = entity.getFormaPagamento();
         tipoConta = entity.getTipoConta();
@@ -51,7 +52,7 @@ public class Transacoes{
         return cpfReceptante;
     }
     //protected String bancoReceptante;
-    public Strig getBancoReceptante(){
+    public String getBancoReceptante(){
         return bancoReceptante;
     }
     //protected String cnpjReceptante;
@@ -59,7 +60,7 @@ public class Transacoes{
         return cnpjReceptante;
     }
     //protected Date dataTransacao;
-    public Date getDataTransacao(){
+    public LocalDate getDataTransacao(){
         return dataTransacao;
     }
 
@@ -80,7 +81,7 @@ public class Transacoes{
 
     //protected String nomeReceptante;
     public String getNomeReceptante(){
-        retun nomeReceptante;
+        return nomeReceptante;
     }
     
     //protected int idadeReceptante;
@@ -88,4 +89,4 @@ public class Transacoes{
         return idadeReceptante;
     }
     }   
-}
+

@@ -1,15 +1,21 @@
 package org.foryou.bancoforyou.Extrato;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.foryou.bancoforyou.Transacao.TransacaoRepository;
+import org.foryou.bancoforyou.Transations.TransacoesRepository;
+import org.foryou.bancoforyou.Transations.Transacoes;
+import org.foryou.bancoforyou.Transations.TransacoesMinDTO;
 
-import java.awt.List;
+import java.util.List;
 
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.SheetBuilder;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExtratoService{
     @Autowired
-    TransacaoRepository transacaoRepository;
+    TransacoesRepository transacaoRepository;
 
     public Workbook gerarExtratoExcel(){
         
@@ -27,19 +33,12 @@ public class ExtratoService{
         header.createCell(6).setCellValue("CPF do Receptante");
         header.createCell(7).setCellValue("BancoReceptante");
         header.createCell(8).setCellValue("CNPJ do Receptante");
-        header.createCell(0).setCellValue("");
-        header.createCell(0).setCellValue("");
-        header.createCell(0).setCellValue("");
-        header.createCell(0).setCellValue("");
-        header.createCell(0).setCellValue("");
-        header.createCell(0).setCellValue("");
-        header.createCell(0).setCellValue("");
 
-        List<Transacao> transacoes = transacoesRepository.findAll();
+        List<TransacoesMinDTO> transacoes = transacaoRepository.findAll();
 
         int rowIndex = 1;
 
-        for (Transacao t : transacoes) {
+        for (TransacoesMinDTO t : transacoes) {
             Row row = sheet.createRow(rowIndex++);
 
         row.createCell(0).setCellValue(t.getDataTransacao().toString());

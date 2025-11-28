@@ -4,31 +4,38 @@ import java.net.http.HttpClient;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
-public class SelfCertifcatedServer {
-    public static HttpClient getHttpClient(){
-        try{
-            TrustManager[] trustAllCerts = new TrustManager() {
-                
-            
+public class SelfCertificatedServer {
+
+    public static HttpClient getHttpClient() {
+        try {
+
+            // TrustManager que aceita qualquer certificado
+            X509TrustManager trustAll = new X509TrustManager() {
                 @Override
-                public X509Certificate[] getAcceptedIssuers() {return null;}
-                @Override
-                public void checkClientTrusted (X509Certificate[] certs, String authType) {}
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+
                 @Override
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
             };
-        
 
-            SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null,trustAllCerts, new java.security.SecureRandom());
+            // Configurando SSL com o TrustManager permissivo
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, new X509TrustManager[]{ trustAll }, new java.security.SecureRandom());
 
-            return HtppClient.newBuilder().sslContext(sslContext).build();
-        } catch (Exception e){
-            throw new RuntimeException("Erro ao configurar HttpClient: " + e.getMessage());
+            return HttpClient.newBuilder()
+                    .sslContext(sslContext)
+                    .version(HttpClient.Version.HTTP_2)
+                    .build();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao configurar HttpClient SSL: " + e.getMessage(), e);
         }
     }
 }
-       
-

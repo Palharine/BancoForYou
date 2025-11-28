@@ -3,15 +3,16 @@ package org.foryou.bancoforyou.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
 
 @Repository
 //Serve para realizar operações no banco de dados, servindo como um DAO, sempre vai extender um repositório, sendo do JPA ou do banco de dados selecionado, herdando as operações CRUD	
-public interface UserRepository extends MongoRepository<Ususarios,ObjectId>{
+public interface UserRepository extends MongoRepository<UserMinDTO, ObjectId>{
 	
-    public UserMinDTO pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor);
+    public void pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor);
 	Optional<UserMinDTO> findUserByName(String name);
     
 }

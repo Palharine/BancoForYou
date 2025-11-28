@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 
 import org.antlr.v4.runtime.misc.NotNull;
 
-public record CreatereReferenceRequestDTO(
+public record CreateReferenceRequestDTO(
     
          Long userId,
          
-         @DecimalMin( value = "0,01", message = "Total deve ser maior que zero")
+         
          BigDecimal valor,
          PayerDTO payer,
          @NotNull

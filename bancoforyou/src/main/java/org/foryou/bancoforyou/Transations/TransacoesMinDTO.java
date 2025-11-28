@@ -1,6 +1,7 @@
 package org.foryou.bancoforyou.Transations;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TransacoesMinDTO{
@@ -9,7 +10,7 @@ public class TransacoesMinDTO{
 
     protected BigDecimal valor;
 
-    protected Date dataTransacao;
+    protected LocalDate dataTransacao;
 
     protected String nomeReceptante;
 
@@ -32,7 +33,7 @@ public class TransacoesMinDTO{
         return nomeReceptante;   
     }
 
-    public Date getDataTransacao(){
+    public LocalDate getDataTransacao(){
         return dataTransacao;
     }
 }

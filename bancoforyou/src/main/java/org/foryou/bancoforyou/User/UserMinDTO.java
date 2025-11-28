@@ -40,7 +40,7 @@ public class UserMinDTO{
         return idade;
     }
 
-    public Double getSaldo(){
+    public BigDecimal getSaldo(){
         return saldo;
     }
 

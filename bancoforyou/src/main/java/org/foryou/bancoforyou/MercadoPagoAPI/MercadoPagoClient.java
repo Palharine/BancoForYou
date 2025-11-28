@@ -5,7 +5,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
+import com.mercadopago.client.preference.PreferenceClient;
 import com.mercadopago.client.preference.PreferenceItemRequest;
 import com.mercadopago.client.preference.PreferencePayerRequest;
 import com.mercadopago.client.preference.PreferenceRequest;
@@ -15,68 +17,79 @@ import com.mercadopago.resources.preference.Preference;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
-@Slf4j
-public class MercadoPagoClient{
+import org.foryou.bancoforyou.MercadoPagoAPI.CreatePreferenceRequestDTO;
+import org.foryou.bancoforyou.MercadoPagoAPI.CreatePreferenceResponseDTO;
 
-    @Value("${mercadopago-access-token")
-    private String acessToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Component
+public class MercadoPagoClient {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(MercadoPagoClient.class);
+    @Value("${mercadopago-access-token}")
+    private String accessToken;
 
     @Value("${mercadopago-notification-url}")
     private String notificationUrl;
-    
+
     @PostConstruct
-    public void init(){
-        MercadoPagoConfig.setAccesToken(acessToken);
-        log.info("Iniciaindo Mercado Pago");
+    public void init() {
+        MercadoPagoConfig.setAccessToken(accessToken);
+        log.info("MercadoPago initialized");
     }
 
-    public CreateResponseDTO createPreference(CreatePreferenceRequestDTO inputData, String orderNumber) throws MPException, 
-           MPApiException{
+    public CreatePreferenceResponseDTO createPreference(CreatePreferenceRequestDTO inputData, String orderNumber)
+            throws MPException, MPApiException {
 
-               log.info("Criando Preferencia de pagamento no Mercado Pago com dados: {}", inputData);
-            try{
-        PreferenceClient preferenceClient = new PreferenceClient();
+        log.info("Criando preferência com os dados: {}", inputData);
 
-        PreferencePayerRequest payer = PreferencePayerRequest().builder()
-            .name(inputData.payer().name())
-            .email(inputData.payer().email())
-            .build();
+        try {
+            PreferenceClient client = new PreferenceClient();
 
+            // Payer
+            PreferencePayerRequest payer = PreferencePayerRequest.builder()
+                    .name(inputData.getPayer().getName())
+                    .email(inputData.getPayer().getEmail())
+                    .build();
 
-        PreferenceBackUrlsRequest backUrlsRequest = PreferenceBackUrlsRequest.builder()
-            .success(inputData.backUrls().success())
-            .failure(inputData.backUrls().failure())
-            .pending(inputData.backUrls.pending())
-            .build();
+            // Item
+            PreferenceItemRequest item = PreferenceItemRequest.builder()
+                    .title(inputData.getItem().getTitle())
+                    .quantity(inputData.getItem().getQuantity())
+                    .unitPrice(new java.math.BigDecimal(inputData.getItem().getPrice()))                    
+                    .build();
 
-        PreferenceRequest preferenceRequest = new PreferenceRequest().builder()
-            .payer(payer)
-            .backUrls(backUrl)
-            .notificationUrl(notificationUrl)
-            .externalReference(orderNumber)
-            .autoReturn("approved")
-            .build();
+            // Back URLs
+            PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                    .success(inputData.getBackUrls().getSuccess())
+                    .pending(inputData.getBackUrls().getPending())
+                    .failure(inputData.getBackUrls().getFailure())
+                    .build();
 
+            // Final Request
+            PreferenceRequest request = PreferenceRequest.builder()
+                    .payer(payer)
+                    .items(java.util.List.of(item))
+                    .backUrls(backUrls)
+                    .notificationUrl(notificationUrl)
+                    .externalReference(orderNumber)
+                    .autoReturn("approved")
+                    .build();
 
-            Preference preference = client.create(preferenceClient);
-            log.info("Preferencia criada com sucesso no Mercado Pago: {} e {}", preference.getId(), preference.getInitPoint());
-            return new CreateResponseDTO(
-                    preference.getId(),
-                    preference.getInitPoint()
-                    );
-    
-                
-            }catch(MPApiException e){
-                log.error("Error ao criar preferencias no Mercado Pago na api: {}", e.getMessage());
-                throw e;
-            }catch(MPApiException e){
-                log.error("Error ao criar preferencias no Mercado Pago: {}", e.getMessage());
-                throw e;
-            }catch(Exception e){
-                log.error("Erro inesperado ao criar preferencias no Mercado Pago: {}", e.getMessage());
-                throw new MPException("Erro inesperado ao criar a sua preferencia", e);
-            }
-    }    
+            // Chamada ao MP
+            Preference preference = client.create(request);
+
+            CreatePreferenceResponseDTO response = new CreatePreferenceResponseDTO();
+                response.setId(preference.getId());
+                response.setInitPoint(preference.getInitPoint());
+                response.setExternalReference(preference.getExternalReference());
+            return response;
+        } catch (Exception e) {
+            log.error("Erro inesperado: {}", e.getMessage());
+            throw new MPException("Erro inesperado", e);
+        }
+    }
 }
 

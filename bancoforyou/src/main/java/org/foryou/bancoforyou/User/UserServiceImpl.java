@@ -29,20 +29,20 @@ public class UserServiceImpl implements UserService{
         return userRepository.findUserByName(name);
     }
     
-    public UserMinDTO findById(ObjectId id){
-        UserMinDTO result = userRepository.findById(ObjectId);
+    public Optional<UserMinDTO> findById(ObjectId id){
+        Optional<UserMinDTO> result = userRepository.findById(id);
         return result;
     }
     
     @Transactional
-    public UserMinDTO pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor){
+    public void pagar(ObjectId paganteId, ObjectId receptanteId, String chave, BigDecimal valor){
 
         Usuarios pagante = new Usuarios();
 
         Usuarios receptante = new Usuarios();
 
 
-        if(chave == receptante.getCPF() || receptante.getCNPJ()){
+        if(chave == receptante.getCPF()){
             throw new ResourceNotFoundException("Não encontramos essa pessoa");
         }
 
@@ -55,12 +55,12 @@ public class UserServiceImpl implements UserService{
         
         receptante.setSaldo(receptante.getSaldo().add(valor));
         
-        userRepository.save(pagante);
-        userRepository.save(receptante);
+        UserMinDTO paganteDTO = new UserMinDTO(pagante);
+        UserMinDTO receptanteDTO = new UserMinDTO(receptante);
         
-        result = UserMinDTO.fromEntity(pagante);
-        return result;
+        userRepository.save(paganteDTO);
+        userRepository.save(receptanteDTO);
+        
     }
     
-    //public List<Transacoes> findAllTransacoes(){}
 }
